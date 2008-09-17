@@ -1,3 +1,19 @@
 = try
 
 Extensions to Kernel that allow for retryable blocks of code.
+
+== Examples
+
+* Kernel#retryable
+
+  retryable(:tries => 3, :on => StandardError) do
+    # Some code that could fail, like connecting to a flakey API.
+  end
+
+* Kernel#try
+
+  try(
+    some_method_that_could_fail,
+    Proc.new { raise RuntimeError unless moon.is_blue? },
+    'some fallback value if all things fail'
+  )
